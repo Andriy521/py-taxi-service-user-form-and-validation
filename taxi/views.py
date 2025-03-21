@@ -81,7 +81,7 @@ class CarDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 
 def car_toggle_assigment(request, pk):
-    car = Car.objects.get_or_create(pk=pk)
+    car = Car.objects.get(pk=pk)
 
     if request.user in car.drivers.all():
         car.drivers.remove(request.user)
@@ -89,7 +89,7 @@ def car_toggle_assigment(request, pk):
     else:
         car.drivers.add(request.user)
 
-    return redirect(reverse("taxe:car-detail", kwargs={"pk": pk}))
+    return redirect(reverse("taxi:car-detail", kwargs={"pk": pk}))
 
 
 class DriverListView(LoginRequiredMixin, generic.ListView):
